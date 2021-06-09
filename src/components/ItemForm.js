@@ -18,7 +18,10 @@ function handleFormChange(event) {
 }
 
   return (
-    <form className="NewItem" onSubmit={(e) => onItemFormSubmit(e, {...formData, id: uuid()})}>
+    <form className="NewItem" onSubmit={(e) => {
+      e.preventDefault()
+      onItemFormSubmit({...formData, id: uuid()})
+    }}>
       <label>
         Name:
         <input type="text" name="name" onChange={handleFormChange} value={formData.name}/>
