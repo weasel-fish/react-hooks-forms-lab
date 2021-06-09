@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-function ItemForm({setItems, items}) {
+function ItemForm({onItemFormSubmit}) {
   const [formData, setFormData] = useState({
     category: 'Produce',
     name: ''
@@ -17,13 +17,8 @@ function handleFormChange(event) {
 
 }
 
-function onItemFormSubmit(e) {
-  e.preventDefault()
-  setItems((items) => [...items, {...formData, id: uuid()}])
-}
-
   return (
-    <form className="NewItem" onSubmit={onItemFormSubmit}>
+    <form className="NewItem" onSubmit={(e) => onItemFormSubmit(e, {...formData, id: uuid()})}>
       <label>
         Name:
         <input type="text" name="name" onChange={handleFormChange} value={formData.name}/>
